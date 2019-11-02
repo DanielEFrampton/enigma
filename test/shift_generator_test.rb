@@ -11,7 +11,9 @@ class ShiftGeneratorTest < Minitest::Test
     assert_instance_of ShiftGenerator, @shift_generator
   end
 
-  def test_it_can_add_two_numbers
+  def test_it_can_add_two_numbers_as_ints_or_strings
     assert_equal 5, @shift_generator.add(2, 3)
+    assert_equal 5, @shift_generator.add("2", "3")
+    assert_equal 5, @shift_generator.add(2, "3")
   end
 end
