@@ -11,4 +11,9 @@ class EnigmaTest < Minitest::Test
   def test_it_exists
     assert_instance_of Enigma, @enigma
   end
+
+  def test_it_can_get_todays_date_as_string_of_digits
+    Date.expects(:new).returns(Date.new(2019,11,2))
+    assert_equal "110219", @enigma.get_todays_date
+  end
 end
