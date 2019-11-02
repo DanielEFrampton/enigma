@@ -13,7 +13,8 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_get_todays_date_as_string_of_digits
-    Date.expects(:new).returns(Date.new(2019,11,2))
+    placeholder_date = Date.new(2019,11,2)
+    Date.expects(:new).returns(placeholder_date)
     assert_equal "110219", @enigma.get_todays_date
   end
 end
