@@ -16,7 +16,14 @@ class ShiftGenerator
     number.chars.each_cons(2).map { |pair| pair.join.to_i }
   end
 
+  def generate_offsets(date)
+    get_last_four_of(square(date))
+  end
+
   def add_offsets_to_keys(offsets, keys)
     offsets.chars.map.with_index { |char, ind| char.to_i + keys[ind] }
+  end
+
+  def generate_shift_values(key, date)
   end
 end
