@@ -10,4 +10,12 @@ class Enigma
   def generate_key
     rand(99999).to_s.rjust(5, "0")
   end
+
+  def encrypt(message, key = generate_key, date = get_todays_date)
+    CipherEngine.encrypt(message, key, date)
+  end
+
+  def decrypt(message, key, date = get_todays_date)
+    CipherEngine.decrypt(message, key, date)
+  end
 end
