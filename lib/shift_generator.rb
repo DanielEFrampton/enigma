@@ -15,4 +15,8 @@ class ShiftGenerator
   def split_into_keys(number)
     number.chars.each_cons(2).map { |pair| pair.join.to_i }
   end
+
+  def add_offsets_to_keys(offsets, keys)
+    offsets.chars.map.with_index { |char, ind| char.to_i + keys[ind] }
+  end
 end
