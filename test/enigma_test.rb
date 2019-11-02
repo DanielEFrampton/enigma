@@ -17,4 +17,9 @@ class EnigmaTest < Minitest::Test
     Date.expects(:new).returns(placeholder_date)
     assert_equal "110219", @enigma.get_todays_date
   end
+
+  def test_it_can_generate_key_randomly
+    srand(1111)
+    assert_equal "68325", @enigma.generate_key
+  end
 end
