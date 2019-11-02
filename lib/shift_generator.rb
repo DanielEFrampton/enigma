@@ -11,4 +11,8 @@ class ShiftGenerator
   def get_last_four_of(number)
     number.to_s.slice(-4, 4)
   end
+
+  def split_into_keys(number)
+    number.chars.each_cons(2).map { |pair| pair.join.to_i }
+  end
 end
