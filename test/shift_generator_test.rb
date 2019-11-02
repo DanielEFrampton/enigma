@@ -23,6 +23,7 @@ class ShiftGeneratorTest < Minitest::Test
   end
 
   def test_it_can_get_last_four_digits_of_given_integer
-    assert_equal 7961, @shift_generator.get_last_four_of(12148227961)
+    assert_equal "7961", @shift_generator.get_last_four_of(12148227961)
+    assert_equal "7961", @shift_generator.get_last_four_of("12148227961")
   end
 end
