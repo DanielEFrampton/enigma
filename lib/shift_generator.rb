@@ -25,5 +25,6 @@ class ShiftGenerator
   end
 
   def generate_shift_values(key, date)
+    add_offsets_to_keys(generate_offsets(date), split_into_keys(key))
   end
 end
