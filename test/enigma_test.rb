@@ -24,15 +24,15 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_encrypt_message_with_or_without_date_and_or_key
-    CipherEngine.expects(:encrypt).returns("keder ohulw!")
-    assert_equal "keder ohulw!", Enigma.encrypt("hello world!", "02715", "040895")
-    assert_equal "keder ohulw!", Enigma.encrypt("hello world!", "02715")
-    assert_equal "keder ohulw!", Enigma.encrypt("hello world!")
+    CipherEngine.stubs(:encrypt).returns("keder ohulw!")
+    assert_equal "keder ohulw!", @enigma.encrypt("hello world!", "02715", "040895")
+    assert_equal "keder ohulw!", @enigma.encrypt("hello world!", "02715")
+    assert_equal "keder ohulw!", @enigma.encrypt("hello world!")
   end
 
   def test_it_can_decrypt_given_message_with_or_without_date
-    CipherEngine.expects(:decrypt).returns("hello world!")
-    assert_equal "hello world!", Enigma.decrypt("keder ohulw!", "02715", "040895")
-    assert_equal "hello world!", Enigma.decrypt("keder ohulw!", "02715")
+    CipherEngine.stubs(:decrypt).returns("hello world!")
+    assert_equal "hello world!", @enigma.decrypt("keder ohulw!", "02715", "040895")
+    assert_equal "hello world!", @enigma.decrypt("keder ohulw!", "02715")
   end
 end
