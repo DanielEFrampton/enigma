@@ -19,4 +19,8 @@ class CipherEngineTest < Minitest::Test
     assert_equal expected, CipherEngine.charset
     assert_equal 27, CipherEngine.charset.length
   end
+
+  def test_it_can_encrypt_given_message_using_key_and_date
+    assert_equal "keder ohulw!", CipherEngine.encrypt("hello world!", "02715", "040895")
+  end
 end
