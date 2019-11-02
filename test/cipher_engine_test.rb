@@ -24,4 +24,9 @@ class CipherEngineTest < Minitest::Test
     ShiftGenerator.expects(:generate_shift_values).returns([3, 27, 73, 20])
     assert_equal "keder ohulw!", CipherEngine.encrypt("hello world!", "02715", "040895")
   end
+
+  def test_it_can_decrypt_given_message_using_key_and_date
+    ShiftGenerator.expects(:generate_shift_values).returns([3, 27, 73, 20])
+    assert_equal "hello world!", CipherEngine.decrypt("keder ohulw!", "02715", "040895")
+  end
 end
