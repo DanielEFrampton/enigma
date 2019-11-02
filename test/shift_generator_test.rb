@@ -27,9 +27,8 @@ class ShiftGeneratorTest < Minitest::Test
     assert_equal "7961", @shift_generator.get_last_four_of("12148227961")
   end
 
-  def test_it_can_split_five_digits_into_four_two_digit_number_keys
+  def test_it_can_split_five_digit_string_into_four_two_digit_number_keys
     assert_equal [12, 23, 34, 45], @shift_generator.split_into_keys("12345")
-    assert_equal [12, 23, 34, 45], @shift_generator.split_into_keys(12345)
     assert_equal [0, 1, 10, 0], @shift_generator.split_into_keys("00100")
   end
 end
