@@ -36,4 +36,8 @@ class ShiftGeneratorTest < Minitest::Test
     assert_equal [19, 32, 40, 46], @shift_generator.add_offsets_to_keys("7961", [12, 23, 34, 45])
     assert_equal [0, 2, 10, 1], @shift_generator.add_offsets_to_keys("0101", [0, 1, 10, 0])
   end
+
+  def test_it_can_generate_shift_values_from_key_number_and_date
+    assert_equal [19, 32, 40, 46], @shift_generator.generate_shift_values("12345", "110219")
+  end
 end
