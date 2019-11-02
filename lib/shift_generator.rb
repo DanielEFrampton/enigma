@@ -7,4 +7,8 @@ class ShiftGenerator
   def square(number)
     number.to_i * number.to_i
   end
+
+  def get_last_four_of(number)
+    number.to_s.slice(-4, 4)
+  end
 end
