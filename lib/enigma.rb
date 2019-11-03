@@ -12,10 +12,20 @@ class Enigma
   end
 
   def encrypt(message, key = generate_key, date = get_todays_date)
-    CipherEngine.encrypt(message, key, date)
+    encrypted_message = CipherEngine.encrypt(message, key, date)
+    {
+      encryption: encrypted_message,
+      key: key,
+      date: date
+    }
   end
 
   def decrypt(message, key, date = get_todays_date)
-    CipherEngine.decrypt(message, key, date)
+    decrypted_message = CipherEngine.decrypt(message, key, date)
+    {
+      decryption: decrypted_message,
+      key: key,
+      date: date
+    }
   end
 end
