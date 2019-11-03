@@ -16,6 +16,6 @@ class CommandLineInterfaceTest < Minitest::Test
                  output_path: "encrypted.txt",
                  key: "82648",
                  date: "240818" }
-    assert_equal expected, @command_line_interface.parse_argv(placeholder_input)
+    assert_equal expected, @command_line.parse_argv(placeholder_input)
   end
 end
