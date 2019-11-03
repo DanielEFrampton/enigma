@@ -41,7 +41,7 @@ class EnigmaTest < Minitest::Test
     @enigma.stubs(:get_todays_date).returns("040895")
     CipherEngine.stubs(:decrypt).with("keder ohulw!", "02715", "040895").returns("hello world!")
     expected = {
-                  encryption: "hello world!",
+                  decryption: "hello world!",
                   key: "02715",
                   date: "040895"
                }
