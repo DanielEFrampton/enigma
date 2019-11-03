@@ -24,7 +24,7 @@ class CommandLineInterfaceTest < Minitest::Test
   end
 
   def test_it_can_get_string_from_file
-    File.expects(:read).returns("hello world!")
+    File.expects(:read).with("message.txt").returns("hello world!")
     assert_equal "hello world!", @command_line.get_string_from_file("message.txt")
   end
 end
