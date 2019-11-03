@@ -11,4 +11,7 @@ class CommandLineInterface
     @date = argv[3]
   end
 
+  def get_string_from_file(input_path)
+    File.read(input_path)
+  end
 end
