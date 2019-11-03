@@ -22,4 +22,9 @@ class CommandLineInterfaceTest < Minitest::Test
     assert_equal @placeholder_input[2], @command_line.key
     assert_equal @placeholder_input[3], @command_line.date
   end
+
+  def test_it_can_get_string_from_file
+    File.expects(:read).returns("hello world!")
+    assert_equal "hello world!", @command_line.get_string_from_file("message.txt")
+  end
 end
