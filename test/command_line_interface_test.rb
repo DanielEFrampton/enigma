@@ -53,12 +53,16 @@ class CommandLineInterfaceTest < Minitest::Test
   end
 
   def test_it_can_execute_encryption_sequence
-    skip
     report_block = {
                     encryption: "keder ohulw!",
                     key: "02715",
                     date: "040895"
                    }
     Enigma.expects(:encrypt).with("hello world!").returns(report_block)
+    @command_line.expects(:update_attributes).with(report_block)
+    print_args = ["encrypted.txt", "keder ohulw!"]
+    @command_line.expects(:write_string_to_file).with(*print_args)
+    @command_line.expects(:print_terminal_report)
+    @command_line.execute_encryption_sequence
   end
 end
