@@ -40,4 +40,16 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, Enigma.decrypt("keder ohulw!", "02715", "040895")
     assert_equal expected, Enigma.decrypt("keder ohulw!", "02715")
   end
+
+  def test_it_can_generate_report_block
+    expected = {
+                  decryption: "hello world!",
+                  key: "02715",
+                  date: "040895"
+               }
+    pair = { decryption: "hello world!"}
+    key = "02715"
+    date = "040895"
+    assert_equal expected, Enigma.generate_report_block(pair, key, date)
+  end
 end
