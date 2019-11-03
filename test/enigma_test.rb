@@ -4,48 +4,52 @@ require './lib/enigma'
 
 class EnigmaTest < Minitest::Test
 
-  def setup
-    @enigma = Enigma.new
-  end
-
-  def test_it_exists
-    assert_instance_of Enigma, @enigma
-  end
-
   def test_it_can_get_todays_date_as_string_of_digits
     placeholder_date = Date.new(2019,11,2)
     Date.expects(:new).returns(placeholder_date)
-    assert_equal "110219", @enigma.get_todays_date
+    assert_equal "110219", Enigma.get_todays_date
   end
 
   def test_it_can_generate_key_randomly
     srand(1111)
-    assert_equal "68325", @enigma.generate_key
+    assert_equal "68325", Enigma.generate_key
   end
 
   def test_it_can_encrypt_message_with_or_without_date_and_or_key
-    @enigma.stubs(:generate_key).returns("02715")
-    @enigma.stubs(:get_todays_date).returns("040895")
+    Enigma.stubs(:generate_key).returns("02715")
+    Enigma.stubs(:get_todays_date).returns("040895")
     CipherEngine.stubs(:encrypt).with("hello world!", "02715", "040895").returns("keder ohulw!")
     expected = {
                   encryption: "keder ohulw!",
                   key: "02715",
                   date: "040895"
                }
-    assert_equal expected, @enigma.encrypt("hello world!", "02715", "040895")
-    assert_equal expected, @enigma.encrypt("hello world!", "02715")
-    assert_equal expected, @enigma.encrypt("hello world!")
+    assert_equal expected, Enigma.encrypt("hello world!", "02715", "040895")
+    assert_equal expected, Enigma.encrypt("hello world!", "02715")
+    assert_equal expected, Enigma.encrypt("hello world!")
   end
 
   def test_it_can_decrypt_given_message_with_or_without_date
-    @enigma.stubs(:get_todays_date).returns("040895")
+    Enigma.stubs(:get_todays_date).returns("040895")
     CipherEngine.stubs(:decrypt).with("keder ohulw!", "02715", "040895").returns("hello world!")
     expected = {
                   decryption: "hello world!",
                   key: "02715",
                   date: "040895"
                }
-    assert_equal expected, @enigma.decrypt("keder ohulw!", "02715", "040895")
-    assert_equal expected, @enigma.decrypt("keder ohulw!", "02715")
+    assert_equal expected, Enigma.decrypt("keder ohulw!", "02715", "040895")
+    assert_equal expected, Enigma.decrypt("keder ohulw!", "02715")
+  end
+
+  def test_it_can_generate_report_block
+    expected = {
+                  decryption: "hello world!",
+                  key: "02715",
+                  date: "040895"
+               }
+    pair = { decryption: "hello world!"}
+    key = "02715"
+    date = "040895"
+    assert_equal expected, Enigma.generate_report_block(pair, key, date)
   end
 end
