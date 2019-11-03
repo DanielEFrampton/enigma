@@ -1,5 +1,5 @@
 require './test/test_helper'
-require './lib/enigma'
+require './lib/command_line_interface'
 
 class CommandLineInterfaceTest < Minitest::Test
   def setup
