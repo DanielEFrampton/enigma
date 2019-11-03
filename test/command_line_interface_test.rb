@@ -4,6 +4,7 @@ require './lib/enigma'
 
 class CommandLineInterfaceTest < Minitest::Test
   def setup
+    File.expects(:read).with("message.txt").returns("hello world!")
     @placeholder_input = ["message.txt", "encrypted.txt", "82648", "240818"]
     @command_line = CommandLineInterface.new(@placeholder_input)
   end
@@ -23,9 +24,8 @@ class CommandLineInterfaceTest < Minitest::Test
     assert_equal @placeholder_input[3], @command_line.date
   end
 
-  def test_it_can_get_string_from_file
-    File.expects(:read).with("message.txt").returns("hello world!")
-    assert_equal "hello world!", @command_line.get_string_from_file("message.txt")
+  def test_it_reads_string_from_file_on_initialization
+    assert_equal "hello world!", @command_line.message
   end
 
   def test_it_can_write_string_to_file
