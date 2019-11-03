@@ -47,10 +47,9 @@ class CommandLineInterfaceTest < Minitest::Test
                     key: "02715",
                     date: "040895"
                    }
-    Enigma.expects(:encrypt).with("hello world!").returns(report_block)
     @command_line_2.update_attributes(report_block)
     assert_equal "02715", @command_line_2.key
-    assert_equal "040895", @command_line_2.key
+    assert_equal "040895", @command_line_2.date
   end
 
   def test_it_can_execute_encryption_sequence
