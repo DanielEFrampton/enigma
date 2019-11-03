@@ -4,7 +4,7 @@ require 'date'
 class Enigma
 
   def self.get_todays_date
-    Date.new.strftime("%m%d%y")
+    Date.today.strftime("%m%d%y")
   end
 
   def self.generate_key
