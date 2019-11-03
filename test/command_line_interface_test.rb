@@ -53,7 +53,7 @@ class CommandLineInterfaceTest < Minitest::Test
     assert_equal "040895", @command_line_2.date
   end
 
-  def test_it_can_execute_encryption_sequence
+  def test_it_can_encryption_sequence
     report_block = {
                     encryption: "keder ohulw!",
                     key: "02715",
@@ -64,10 +64,10 @@ class CommandLineInterfaceTest < Minitest::Test
     print_args = ["encrypted.txt", "keder ohulw!"]
     @command_line.expects(:write_string_to_file).with(*print_args)
     @command_line.expects(:print_terminal_report)
-    @command_line.execute_encryption_sequence
+    @command_line.encryption_sequence
   end
 
-  def test_it_can_execute_decryption_sequence
+  def test_it_can_decryption_sequence
     argv_input = ["encrypted.txt", "decrypted.txt", "02715", "040895"]
     File.expects(:read).with("encrypted.txt").returns("keder ohulw!")
     command_line_3 = CommandLineInterface.new(argv_input)
@@ -81,6 +81,6 @@ class CommandLineInterfaceTest < Minitest::Test
     print_args = ["decrypted.txt", "hello world!"]
     command_line_3.expects(:write_string_to_file).with(*print_args)
     command_line_3.expects(:print_terminal_report)
-    command_line_3.execute_decryption_sequence
+    command_line_3.decryption_sequence
   end
 end

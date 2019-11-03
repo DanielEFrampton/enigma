@@ -24,14 +24,14 @@ class CommandLineInterface
     @date = enigma_report[:date]
   end
 
-  def execute_encryption_sequence
+  def encryption_sequence
     enigma_report = Enigma.encrypt(@message)
     update_attributes(enigma_report)
     write_string_to_file(@output_path, enigma_report[:encryption])
     print_terminal_report
   end
 
-  def execute_decryption_sequence
+  def decryption_sequence
     enigma_report = Enigma.decrypt(@message, @key, @date)
     write_string_to_file(@output_path, enigma_report[:decryption])
     print_terminal_report
