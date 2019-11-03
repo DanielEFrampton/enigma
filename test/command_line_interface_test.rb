@@ -4,10 +4,11 @@ require './lib/enigma'
 
 class CommandLineInterfaceTest < Minitest::Test
   def setup
-    File.expects(:read).with("message.txt").twice.returns("hello world!")
+    File.expects(:read).with("message.txt").returns("hello world!")
     @placeholder_input = ["message.txt", "encrypted.txt", "82648", "240818"]
     @command_line = CommandLineInterface.new(@placeholder_input)
-    @input_2 = ["message.txt", "encrypted.txt"]
+    File.expects(:read).with("encrypted.txt").returns("keder ohulw!")
+    @input_2 = ["encrypted.txt", "decrypted.txt"]
     @command_line_2 = CommandLineInterface.new(@input_2)
   end
 
@@ -64,5 +65,22 @@ class CommandLineInterfaceTest < Minitest::Test
     @command_line.expects(:write_string_to_file).with(*print_args)
     @command_line.expects(:print_terminal_report)
     @command_line.execute_encryption_sequence
+  end
+
+  def test_it_can_execute_decryption_sequence
+    argv_input = ["encrypted.txt", "decrypted.txt", "02715", "040895"]
+    File.expects(:read).with("encrypted.txt").returns("keder ohulw!")
+    command_line_3 = CommandLineInterface.new(argv_input)
+    report_block = {
+                    decryption: "hello world!",
+                    key: "02715",
+                    date: "040895"
+                   }
+    decrypt_args = ["keder ohulw!", "02715", "040895"]
+    Enigma.expects(:decrypt).with(*decrypt_args).returns(report_block)
+    print_args = ["decrypted.txt", "hello world!"]
+    command_line_3.expects(:write_string_to_file).with(*print_args)
+    command_line_3.expects(:print_terminal_report)
+    command_line_3.execute_decryption_sequence
   end
 end
