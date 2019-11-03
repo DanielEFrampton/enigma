@@ -13,10 +13,6 @@ class CommandLineInterfaceTest < Minitest::Test
     assert_instance_of CommandLineInterface, @command_line
   end
 
-  def test_it_initializes_with_enigma_instance
-    assert_instance_of Enigma, @command_line.enigma
-  end
-
   def test_it_initializes_with_attributes_from_argv
     assert_equal @placeholder_input[0], @command_line.input_path
     assert_equal @placeholder_input[1], @command_line.output_path
@@ -36,5 +32,9 @@ class CommandLineInterfaceTest < Minitest::Test
   def test_it_can_print_terminal_report
     expected = "Created 'encrypted.txt' with the key 82648 and date 240818\n"
     assert_output(expected) { @command_line.print_terminal_report }
+  end
+
+  def test_it_can_execute_encryption_sequence
+
   end
 end

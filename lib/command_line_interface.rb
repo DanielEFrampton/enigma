@@ -1,10 +1,9 @@
 require './lib/enigma'
 
 class CommandLineInterface
-  attr_reader :enigma, :input_path, :output_path, :key, :date, :message
+  attr_reader :input_path, :output_path, :key, :date, :message
 
   def initialize(argv)
-    @enigma = Enigma.new
     @input_path = argv[0]
     @output_path = argv[1]
     @key = argv[2]
