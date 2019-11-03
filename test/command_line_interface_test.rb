@@ -27,4 +27,9 @@ class CommandLineInterfaceTest < Minitest::Test
     File.expects(:read).with("message.txt").returns("hello world!")
     assert_equal "hello world!", @command_line.get_string_from_file("message.txt")
   end
+
+  def test_it_can_write_string_to_file
+    File.expects(:write).with("encrypted.txt", "keder ohulw!")
+    @command_line.write_string_to_file("encrypted.txt", "keder ohulw!")
+  end
 end
