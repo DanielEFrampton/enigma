@@ -18,4 +18,9 @@ class CommandLineInterface
   def print_terminal_report
     puts "Created '#{output_path}' with the key #{key} and date #{date}"
   end
+
+  def update_attributes(enigma_report)
+    @key = enigma_report[:key]
+    @date = enigma_report[:date]
+  end
 end
