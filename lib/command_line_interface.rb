@@ -14,4 +14,8 @@ class CommandLineInterface
   def get_string_from_file(input_path)
     File.read(input_path)
   end
+
+  def write_string_to_file(output_path, string)
+    File.write(output_path, string)
+  end
 end
