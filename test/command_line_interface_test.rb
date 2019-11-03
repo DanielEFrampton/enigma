@@ -5,7 +5,7 @@ require './lib/enigma'
 class CommandLineInterfaceTest < Minitest::Test
   def setup
     @placeholder_input = ["message.txt", "encrypted.txt", "82648", "240818"]
-    @command_line = CommandLineInterface.new(placeholder_input)
+    @command_line = CommandLineInterface.new(@placeholder_input)
   end
 
   def test_it_exists
