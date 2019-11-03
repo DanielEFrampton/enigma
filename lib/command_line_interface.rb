@@ -30,4 +30,10 @@ class CommandLineInterface
     write_string_to_file(@output_path, enigma_report[:encryption])
     print_terminal_report
   end
+
+  def execute_decryption_sequence
+    enigma_report = Enigma.decrypt(@message, @key, @date)
+    write_string_to_file(@output_path, enigma_report[:decryption])
+    print_terminal_report
+  end
 end
