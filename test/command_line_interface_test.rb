@@ -34,7 +34,7 @@ class CommandLineInterfaceTest < Minitest::Test
   end
 
   def test_it_can_print_terminal_report
-    expected = "Created 'encrypted.txt' with the key 82648 and date 240818"
-    assert_output expected, @command_line.print_terminal_report
+    expected = "Created 'encrypted.txt' with the key 82648 and date 240818\n"
+    assert_output(expected) { @command_line.print_terminal_report }
   end
 end
