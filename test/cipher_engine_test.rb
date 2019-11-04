@@ -22,7 +22,7 @@ class CipherEngineTest < Minitest::Test
 
   def test_it_can_get_index_value_of_a_character_on_charset
     assert_equal 0, CipherEngine.get_index("a")
-    assert_equal 27, CipherEngine.get_index(" ")
+    assert_equal 26, CipherEngine.get_index(" ")
   end
 
   def test_it_can_encrypt_given_message_using_key_and_date
