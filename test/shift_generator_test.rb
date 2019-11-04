@@ -44,10 +44,4 @@ class ShiftGeneratorTest < Minitest::Test
   def test_it_can_generate_shift_values_from_key_number_and_date
     assert_equal [19, 32, 40, 46], ShiftGenerator.generate_shift_values("12345", "110219")
   end
-
-
-  def test_it_can_get_shift_value_from_encrypted_and_decrypted_charactes
-    assert_equal 3, ShiftGenerator.shift_between("a", "d")
-    assert_equal 4, ShiftGenerator.shift_between("z", "d")
-  end
 end
