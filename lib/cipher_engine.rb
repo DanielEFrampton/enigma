@@ -2,17 +2,22 @@ require './lib/shift_generator'
 
 class CipherEngine
   @@charset = ("a".."z").to_a << " "
+  @@known_end = " end".chars
 
   def self.charset
     @@charset
   end
 
   def self.shift_character(char, shift, operation)
-    charset[get_index(char).send(operation, shift) % 27]
+    charset[to_index(char).send(operation, shift) % 27]
   end
 
-  def self.get_index(char)
+  def self.to_index(char)
     charset.index(char)
+  end
+
+  def self.to_char(index)
+    charset[index]
   end
 
   def self.engine(message, key, date, operation)
@@ -33,6 +38,14 @@ class CipherEngine
   end
 
   def self.shift_between(decrypt_char, encrypt_char)
-    ((27 - get_index(decrypt_char)) + get_index(encrypt_char)) % 27
+    ((27 - to_index(decrypt_char)) + to_index(encrypt_char)) % 27
+  end
+
+  def self.crack_shifts(message)
+    message.slice(-4, 4).split.map
+  end
+
+  def self.crack_key(encrypted_msg, date)
+    ShiftGenerator.generate_offsets(date)
   end
 end
