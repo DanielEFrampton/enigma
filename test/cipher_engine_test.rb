@@ -12,7 +12,7 @@ class CipherEngineTest < Minitest::Test
     assert_instance_of CipherEngine, @cipher_engine
   end
 
-  def test_it_has_class_variable_holding_charset
+  def test_it_can_return_charset
     expected = ["a", "b", "c", "d", "e", "f", "g",
                 "h", "i", "j", "k", "l", "m", "n", "o", "p",
                 "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
