@@ -50,20 +50,53 @@ class CipherEngine
     shifts.map.with_index { |shift, index| shift - offsets[index].to_i }
   end
 
+  def self.get_key_permutations(keys)
+    keys.map do |key|
+      [
+        key.to_s.prepend("0"), (key + 27).to_s, (key + 54).to_s, (key + 81).to_s
+      ].reject { |key| key.length > 2 }
+    end
+  end
+
+  def self.find_original_keys(perms)
+    originals = []
+    perms[0].each do |perm_1|
+      # Does a matching permutation exist on 2nd array? If not, next.
+      unless perms[1].any? { |perm| perm[0] == perm_1[-1] }
+        next
+      else
+        # If so, save found permutation as 2nd.
+        perm_2 = perms[1].find { |perm| perm[0] == perm_1[-1] }
+        # Does a matching permutation exist on 3rd array? If not, next.
+        unless perms[2].any? { |perm| perm[0] == perm_2[-1] }
+          next
+        else
+          # If so, save found permutation as 3rd.
+          perm_3 = perms[2].find { |perm| perm[0] == perm_2[-1] }
+          # Does a matching permutation exist on 4th array? If not, next.
+          unless perms[3].any? { |perm| perm[0] == perm_3[-1] }
+            next
+          else
+            # If so, save as 4th to results array and begin backing out.
+            originals[3] = perms[3].find { |perm| perm[0] == perm_3[-1] }
+          end
+        # Save third to results array, back out.
+        originals[2] = perm_3
+        end
+      # Save second to results array, back out.
+      originals[1] = perm_2
+      end
+      originals[0] = perm_1
+    end
+    originals
+  end
+
+  def self.combine_keys(keys)
+    "#{keys[0]}#{keys[1][-1]}#{keys[2][-1]}#{keys[3][-1]}"
+  end
+
   def self.crack_key(encrypted_msg, date)
-    # 1. create collection of arrays for each key with all two-digit options which
-    # equal % 27 == the original number. There are 3-4 for any given number.
-    # 2a. For each number in the first array, is there a number in the next one
-    # which begins with the same digit as this one ends with? If not, delete it.
-    # Repeat process from right to left, and again from left to right, etc.,
-    # until there is only one value left in each column.
-    # 2b. Alternatively, do tree-like search: does number exist in next array
-    # with matching first digit to last digit? If so, does that number have a
-    # matchin number in next column? If so, does that one?...if not, go to next
-    # number on first array and look again for a chain.
-      # Question: would there ever be a situation where there are two possible
-      # matches? Answer: no apparently not, by virtue of how 7 adds in the ones
-      # column and the lack of repetition in the tens column for obv. reasons.
-    # 3. Recombine them into five-digit key.
+    keys = crack_keys(crack_shifts(encrypted_msg), date)
+    combine_keys(find_original_keys(get_key_permutations(keys)))
   end
 end
