@@ -73,7 +73,6 @@ class CipherEngineTest < Minitest::Test
   end
 
   def test_it_can_crack_key_from_encrypted_message_and_date
-    skip
     assert_equal "08304", CipherEngine.crack_key("vjqtbeaweqihssi", "291018")
   end
 end
