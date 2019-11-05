@@ -67,7 +67,11 @@ class CipherEngineTest < Minitest::Test
     expected = %w(08 83 30 04)
     assert_equal expected, CipherEngine.find_original_keys(arg)
   end
-  
+
+  def test_it_can_combine_keys_into_five_digit_key
+    assert_equal "08304", CipherEngine.combine_keys(%w(08 83 30 04))
+  end
+
   def test_it_can_crack_key_from_encrypted_message_and_date
     skip
     assert_equal "08304", CipherEngine.crack_key("vjqtbeaweqihssi", "291018")
