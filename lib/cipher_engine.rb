@@ -50,10 +50,15 @@ class CipherEngine
     shifts.map.with_index { |shift, index| shift - offsets[index].to_i }
   end
 
+  def self.get_key_permutations(keys)
+    keys.map do |key|
+      [
+        key.to_s.prepend("0"), (key + 27).to_s, (key + 54).to_s, (key + 81).to_s
+      ].reject { |key| key.length > 2 }
+    end
+  end
+
   def self.crack_key(encrypted_msg, date)
-    # 1. create collection of arrays for each key with all two-digit options which
-    # equal % 27 == the original number. There are 3-4 for any given number,
-    # four for all numbers 24 and under, 3 for 25, 26, 27, and 0.
 
     # 2. Do tree-like search: does number exist in next array
     # with matching first digit to last digit? If so, does that number have a
