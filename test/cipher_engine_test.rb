@@ -53,8 +53,11 @@ class CipherEngineTest < Minitest::Test
     assert_equal [14, 5, 5, 8], CipherEngine.crack_shifts("vjqtbeaweqihssi")
   end
 
+  def test_it_can_get_keys_from_shift_values_with_date
+    assert_equal [8, 2, 3, 4], CipherEngine.crack_keys
+  end
+
   def test_it_can_crack_key_from_encrypted_message_and_date
-    skip
     assert_equal "08304", CipherEngine.crack_key("vjqtbeaweqihssi", "291018")
   end
 end
