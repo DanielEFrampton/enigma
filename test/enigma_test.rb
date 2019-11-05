@@ -3,10 +3,10 @@ require './lib/cipher_engine'
 require './lib/enigma'
 
 class EnigmaTest < Minitest::Test
-
   def test_it_can_get_todays_date_as_string_of_digits
-    placeholder_date = Date.new(2019,11,2)
-    Date.expects(:new).returns(placeholder_date)
+    today = mock('date object')
+    Date.expects(:today).returns(today)
+    today.expects(:strftime).returns("110219")
     assert_equal "110219", Enigma.get_todays_date
   end
 
@@ -39,6 +39,17 @@ class EnigmaTest < Minitest::Test
                }
     assert_equal expected, Enigma.decrypt("keder ohulw!", "02715", "040895")
     assert_equal expected, Enigma.decrypt("keder ohulw!", "02715")
+  end
+
+  def test_it_can_crack_key_of_message_with_date_then_decrypt
+    CipherEngine.stubs(:crack_key).returns("08304")
+    CipherEngine.stubs(:decrypt).returns("hello world end")
+    expected = {
+                  decryption: "hello world end",
+                  date: "291018",
+                  key: "08304"
+               }
+    assert_equal expected, Enigma.crack("vjqtbeaweqihssi", "291018")
   end
 
   def test_it_can_generate_report_block
