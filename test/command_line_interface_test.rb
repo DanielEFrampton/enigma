@@ -67,7 +67,7 @@ class CommandLineInterfaceTest < Minitest::Test
     @command_line.encryption_sequence
   end
 
-  def test_it_can_decryption_sequence
+  def test_it_can_execute_decryption_sequence
     argv_input = ["encrypted.txt", "decrypted.txt", "02715", "040895"]
     File.expects(:read).with("encrypted.txt").returns("keder ohulw!")
     command_line_3 = CommandLineInterface.new(argv_input)
@@ -82,5 +82,24 @@ class CommandLineInterfaceTest < Minitest::Test
     command_line_3.expects(:write_string_to_file).with(*print_args)
     command_line_3.expects(:print_terminal_report)
     command_line_3.decryption_sequence
+  end
+
+  def test_it_can_execute_crack_sequence
+    argv_input = ["encrypted.txt", "cracked.txt", "291018"]
+    File.expects(:read).with("encrypted.txt").returns("vjqtbeaweqihssi")
+    command_line_4 = CommandLineInterface.new(argv_input, true)
+    report_block = {
+                    decryption: "hello world end",
+                    key: "08304",
+                    date: "291018"
+                   }
+    Enigma.expects(:crack).with("vjqtbeaweqihssi", "291018").returns(report_block)
+    print_args = ["cracked.txt", "hello world end"]
+    command_line_4.expects(:write_string_to_file).with(*print_args)
+    command_line_4.expects(:print_terminal_report).with(true)
+    command_line_4.crack_sequence
+
+    # expected_output = "Created 'cracked.txt' with the cracked key 08304 and date 291018"
+    # assert_output(expected_output) { command_line_4.crack_sequence }
   end
 end
