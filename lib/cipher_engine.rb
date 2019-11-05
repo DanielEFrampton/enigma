@@ -5,10 +5,6 @@ class CipherEngine
     ("a".."z").to_a << " "
   end
 
-  def self.known_end
-    @@known_end
-  end
-
   def self.shift_character(char, shift, operation)
     charset[to_index(char).send(operation, shift) % 27]
   end
@@ -49,7 +45,25 @@ class CipherEngine
     shifts.rotate!(4 - (message.length % 4))
   end
 
+  def self.crack_keys(shifts, date)
+    offsets = ShiftGenerator.generate_offsets(date)
+    shifts.map.with_index { |shift, index| shift - offsets[index].to_i }
+  end
+
   def self.crack_key(encrypted_msg, date)
-    ShiftGenerator.generate_offsets(date)
+    # 1. create collection of arrays for each key with all two-digit options which
+    # equal % 27 == the original number. There are 3-4 for any given number.
+    # 2a. For each number in the first array, is there a number in the next one
+    # which begins with the same digit as this one ends with? If not, delete it.
+    # Repeat process from right to left, and again from left to right, etc.,
+    # until there is only one value left in each column.
+    # 2b. Alternatively, do tree-like search: does number exist in next array
+    # with matching first digit to last digit? If so, does that number have a
+    # matchin number in next column? If so, does that one?...if not, go to next
+    # number on first array and look again for a chain.
+      # Question: would there ever be a situation where there are two possible
+      # matches? Answer: no apparently not, by virtue of how 7 adds in the ones
+      # column and the lack of repetition in the tens column for obv. reasons.
+    # 3. Recombine them into five-digit key.
   end
 end
