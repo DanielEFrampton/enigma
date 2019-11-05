@@ -62,6 +62,12 @@ class CipherEngineTest < Minitest::Test
     assert_equal expected, CipherEngine.get_key_permutations([8, 2, 3, 4])
   end
 
+  def test_it_can_find_original_keys_among_permutations
+    arg = [%w(08 35 62 89), %w(02 29 56 83), %w(03 30 57 84), %w(04 31 58 85)]
+    expected = %w(08 83 30 04)
+    assert_equal expected, CipherEngine.find_original_keys(arg)
+  end
+  
   def test_it_can_crack_key_from_encrypted_message_and_date
     skip
     assert_equal "08304", CipherEngine.crack_key("vjqtbeaweqihssi", "291018")
