@@ -21,6 +21,11 @@ class Enigma
     generate_report_block(pair, key, date)
   end
 
+  def self.crack(message, date = get_todays_date)
+    key = CipherEngine.crack_key(message, date)
+    self.decrypt(message, key, date)
+  end
+
   def self.generate_report_block(pair, key, date)
     pair.merge({ key: key, date: date })
   end
