@@ -44,6 +44,10 @@ class CipherEngineTest < Minitest::Test
     assert_equal 26, CipherEngine.shift_between("a", " ")
   end
 
+  def test_it_can_get_shift_values_from_message_with_known_ending
+    assert_equal [14, 5, 5, 8], CipherEngine.crack_shifts("vjqtbeaweqihssi")
+  end
+
   def test_it_can_crack_key_from_encrypted_message_and_date
     assert_equal "08304", CipherEngine.crack_key("vjqtbeaweqihssi", "291018")
   end
