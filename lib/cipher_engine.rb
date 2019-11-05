@@ -96,5 +96,7 @@ class CipherEngine
   end
 
   def self.crack_key(encrypted_msg, date)
+    keys = crack_keys(crack_shifts(encrypted_msg), date)
+    combine_keys(find_original_keys(get_key_permutations(keys)))
   end
 end
