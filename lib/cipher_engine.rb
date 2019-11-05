@@ -54,7 +54,7 @@ class CipherEngine
     keys.map do |key|
       [
         key.to_s.prepend("0"), (key + 27).to_s, (key + 54).to_s, (key + 81).to_s
-      ].reject { |key| key.length > 2 }
+      ].reject { |key_perm| key_perm.length > 2 }
     end
   end
 
