@@ -9,10 +9,14 @@ class CipherEngine
 
   def self.shift_character(char, shift, type)
     if type == :encrypt
-      charset[(charset.index(char) + shift) % 27]
+      charset[(get_index(char) + shift) % 27]
     elsif type == :decrypt
-      charset[(charset.index(char) - shift) % 27]
+      charset[(get_index(char) - shift) % 27]
     end
+  end
+
+  def self.get_index(char)
+    charset.index(char)
   end
 
   def self.engine(message, key, date, type)
@@ -30,5 +34,9 @@ class CipherEngine
 
   def self.decrypt(message, key, date)
     engine(message, key, date, :decrypt)
+  end
+
+  def self.shift_between(decrypt_char, encrypt_char)
+    ((27 - get_index(decrypt_char)) + get_index(encrypt_char)) % 27
   end
 end
