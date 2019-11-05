@@ -1,11 +1,12 @@
 require './lib/shift_generator'
 
 class CipherEngine
-  @@charset = ("a".."z").to_a << " "
-  @@known_end = " end".chars
-
   def self.charset
-    @@charset
+    ("a".."z").to_a << " "
+  end
+
+  def self.known_end
+    @@known_end
   end
 
   def self.shift_character(char, shift, operation)
@@ -42,7 +43,10 @@ class CipherEngine
   end
 
   def self.crack_shifts(message)
-    message.slice(-4, 4).split.map
+    shifts = message.slice(-4, 4).chars.map.with_index do |encrypt_char, index|
+      shift_between([" ", "e", "n", "d"][index], encrypt_char)
+    end
+    shifts.rotate!(4 - (message.length % 4))
   end
 
   def self.crack_key(encrypted_msg, date)
