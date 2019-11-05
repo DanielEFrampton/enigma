@@ -91,14 +91,10 @@ class CipherEngine
     originals
   end
 
+  def self.combine_keys(keys)
+    "#{keys[0]}#{keys[1][-1]}#{keys[2][-1]}#{keys[3][-1]}"
+  end
+
   def self.crack_key(encrypted_msg, date)
-
-    # 2. Do tree-like search: does number exist in next array
-    # with matching first digit to last digit? If so, does that number have a
-    # matchin number in next column? If so, does that one?...if not, go to next
-    # number on first array and look again for a chain. Select the one that
-    # goes all the way to 4th array.
-
-    # 3. Recombine them into five-digit key.
   end
 end
