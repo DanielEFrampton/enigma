@@ -1,8 +1,8 @@
 # Enigma Project
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Enigma-plugboard.jpg" alt="Enigma-plugboard.jpg" width=500>
 
-<p><a href="https://commons.wikimedia.org/wiki/File:Enigma-plugboard.jpg#/media/File:Enigma-plugboard.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Enigma-plugboard.jpg" alt="Enigma-plugboard.jpg" width=500></a><br>By Bob Lord - <a rel="nofollow" class="external text" href="http://www.ilord.com/enigma.html">German Enigma Machine</a>, uploaded in english wikipedia on 16. Feb. 2005 by <a href="https://en.wikipedia.org/wiki/User:Matt_Crypto" class="extiw" title="en:User:Matt Crypto">en:User:Matt Crypto</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=258976">Link</a></p>
-
+Image citation: [^1]
 
 ## Overview
 
@@ -36,3 +36,7 @@ Upon completion of this project, I was asked to assess my performance based on [
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | Score | 4 | 4 | 4 | 4 |
 | Reason | Encrypt, decrypt, and crack methods successfully implemented and command line interfaces implemented for all. | Methods are less than 8 lines each, classes are less than 100 lines long, lines of code are less than 80 characters, two classes utilize class methods extensively, and variable and method names were named carefully for clarity about their purpose. With modifications to the character set, the module could be reused.| Tests were written before code, test coverage is at 100%, test names are specific, and mocks and stubs are used throughout the project. | 15 Pull Requests were made and merged, over 150 commits were made with clear messages and limited to small components of functionality.
+
+---
+
+[^1]: By Bob Lord - <a rel="nofollow" class="external text" href="http://www.ilord.com/enigma.html">German Enigma Machine</a>, uploaded in english wikipedia on 16. Feb. 2005 by <a href="https://en.wikipedia.org/wiki/User:Matt_Crypto" class="extiw" title="en:User:Matt Crypto">en:User:Matt Crypto</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=258976">Link</a>
