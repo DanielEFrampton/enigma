@@ -3,15 +3,6 @@ require './lib/shift_generator'
 require './lib/message_shifter'
 
 class MessageShifterTest < Minitest::Test
-
-  def setup
-    @cipher_engine = MessageShifter.new
-  end
-
-  def test_it_exists
-    assert_instance_of MessageShifter, @cipher_engine
-  end
-
   def test_it_can_return_charset
     expected = ["a", "b", "c", "d", "e", "f", "g",
                 "h", "i", "j", "k", "l", "m", "n", "o", "p",
