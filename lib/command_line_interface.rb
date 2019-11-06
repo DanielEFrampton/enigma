@@ -17,7 +17,8 @@ class CommandLineInterface
   end
 
   def print_terminal_report(crack = false)
-    puts "Created '#{output_path}' with the #{"cracked " if crack}key #{key} and date #{date}"
+    puts "Created '#{output_path}' with the " +
+    "#{"cracked " if crack}key #{key} and date #{date}"
   end
 
   def update_attributes(enigma_report)
