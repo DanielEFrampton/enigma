@@ -59,7 +59,7 @@ class CommandLineInterfaceTest < Minitest::Test
                     key: "02715",
                     date: "040895"
                    }
-    Enigma.expects(:encrypt).with("hello world!").returns(report_block)
+    @command_line.enigma.expects(:encrypt).with("hello world!").returns(report_block)
     @command_line.expects(:update_attributes).with(report_block)
     print_args = ["encrypted.txt", "keder ohulw!"]
     @command_line.expects(:write_string_to_file).with(*print_args)
@@ -77,7 +77,7 @@ class CommandLineInterfaceTest < Minitest::Test
                     date: "040895"
                    }
     decrypt_args = ["keder ohulw!", "02715", "040895"]
-    Enigma.expects(:decrypt).with(*decrypt_args).returns(report_block)
+    command_line_3.enigma.expects(:decrypt).with(*decrypt_args).returns(report_block)
     print_args = ["decrypted.txt", "hello world!"]
     command_line_3.expects(:write_string_to_file).with(*print_args)
     command_line_3.expects(:print_terminal_report)
@@ -93,7 +93,7 @@ class CommandLineInterfaceTest < Minitest::Test
                     key: "08304",
                     date: "291018"
                    }
-    Enigma.expects(:crack).with("vjqtbeaweqihssi", "291018").returns(report_block)
+    command_line_4.enigma.expects(:crack).with("vjqtbeaweqihssi", "291018").returns(report_block)
     print_args = ["cracked.txt", "hello world end"]
     command_line_4.expects(:write_string_to_file).with(*print_args)
     command_line_4.expects(:print_terminal_report).with(true)
