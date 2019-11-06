@@ -1,10 +1,12 @@
 # Enigma Project
 
-![alt text](https://upload.wikimedia.org/wikipedia/commons/2/27/Enigma-plugboard.jpg "The Enigma Machine")
+
+<p><a href="https://commons.wikimedia.org/wiki/File:Enigma-plugboard.jpg#/media/File:Enigma-plugboard.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Enigma-plugboard.jpg" alt="Enigma-plugboard.jpg" width=500></a><br>By Bob Lord - <a rel="nofollow" class="external text" href="http://www.ilord.com/enigma.html">German Enigma Machine</a>, uploaded in english wikipedia on 16. Feb. 2005 by <a href="https://en.wikipedia.org/wiki/User:Matt_Crypto" class="extiw" title="en:User:Matt Crypto">en:User:Matt Crypto</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=258976">Link</a></p>
+
 
 ## Overview
 
-The *Enigma* project was designed for Turing School of Software and Development to develop my skills with Ruby, OOP, Test-Driven Development, and version control using Github. It implements a simplified version of the Enigma machine and then cracks its encryption, as Alan Turing and his partners did as depicted in *The Imitation Game*.
+The *Enigma* project was designed for Turing School of Software and Development to develop my skills with Ruby, OOP, Test-Driven Development, and version control using Github. It implements a simplified version of the historic Enigma machine and then cracks its encryption, as Alan Turing and his team were depicted doing in *The Imitation Game*.
 
 ## Usage
 
