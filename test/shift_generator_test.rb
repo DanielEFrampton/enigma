@@ -11,12 +11,6 @@ class ShiftGeneratorTest < Minitest::Test
     assert_instance_of ShiftGenerator, @shift_generator
   end
 
-  def test_it_can_add_two_numbers_as_ints_or_strings
-    assert_equal 5, ShiftGenerator.add(2, 3)
-    assert_equal 5, ShiftGenerator.add("2", "3")
-    assert_equal 5, ShiftGenerator.add(2, "3")
-  end
-
   def test_it_can_square_a_number_as_ints_or_strings
     assert_equal 12148227961, ShiftGenerator.square(110219)
     assert_equal 12148227961, ShiftGenerator.square("110219")
@@ -33,8 +27,10 @@ class ShiftGeneratorTest < Minitest::Test
   end
 
   def test_it_can_add_offsets_to_keys
-    assert_equal [19, 32, 40, 46], ShiftGenerator.add_offsets_to_keys("7961", [12, 23, 34, 45])
-    assert_equal [0, 2, 10, 1], ShiftGenerator.add_offsets_to_keys("0101", [0, 1, 10, 0])
+    args = ["7961", [12, 23, 34, 45]]
+    assert_equal [19, 32, 40, 46], ShiftGenerator.add_offsets_to_keys(*args)
+    args_2 = ["0101", [0, 1, 10, 0]]
+    assert_equal [0, 2, 10, 1], ShiftGenerator.add_offsets_to_keys(*args_2)
   end
 
   def test_it_can_generate_offsets_from_date
@@ -42,6 +38,7 @@ class ShiftGeneratorTest < Minitest::Test
   end
 
   def test_it_can_generate_shift_values_from_key_number_and_date
-    assert_equal [19, 32, 40, 46], ShiftGenerator.generate_shift_values("12345", "110219")
+    args = ["12345", "110219"]
+    assert_equal [19, 32, 40, 46], ShiftGenerator.generate_shift_values(*args)
   end
 end
