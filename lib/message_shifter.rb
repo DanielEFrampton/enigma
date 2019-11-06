@@ -1,6 +1,6 @@
 require './lib/shift_generator'
 
-class CipherEngine
+class MessageShifter
   def self.charset
     ("a".."z").to_a << " "
   end

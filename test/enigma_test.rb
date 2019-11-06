@@ -1,5 +1,5 @@
 require './test/test_helper'
-require './lib/cipher_engine'
+require './lib/message_shifter'
 require './lib/enigma'
 
 class EnigmaTest < Minitest::Test
@@ -23,7 +23,7 @@ class EnigmaTest < Minitest::Test
     @enigma.stubs(:generate_key).returns("02715")
     @enigma.stubs(:get_todays_date).returns("040895")
     args = ["hello world!", "02715", "040895"]
-    CipherEngine.stubs(:encrypt).with(*args).returns("keder ohulw!")
+    MessageShifter.stubs(:encrypt).with(*args).returns("keder ohulw!")
     expected = {
                   encryption: "keder ohulw!",
                   key: "02715",
@@ -37,7 +37,7 @@ class EnigmaTest < Minitest::Test
   def test_it_can_decrypt_given_message_with_or_without_date
     @enigma.stubs(:get_todays_date).returns("040895")
     args = ["keder ohulw!", "02715", "040895"]
-    CipherEngine.stubs(:decrypt).with(*args).returns("hello world!")
+    MessageShifter.stubs(:decrypt).with(*args).returns("hello world!")
     expected = {
                   decryption: "hello world!",
                   key: "02715",
@@ -48,8 +48,8 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_crack_key_of_message_with_date_then_decrypt
-    CipherEngine.stubs(:crack_key).returns("08304")
-    CipherEngine.stubs(:decrypt).returns("hello world end")
+    MessageShifter.stubs(:crack_key).returns("08304")
+    MessageShifter.stubs(:decrypt).returns("hello world end")
     expected = {
                   decryption: "hello world end",
                   date: "291018",

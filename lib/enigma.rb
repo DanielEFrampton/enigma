@@ -1,4 +1,4 @@
-require './lib/cipher_engine'
+require './lib/message_shifter'
 require 'date'
 
 class Enigma
@@ -12,17 +12,17 @@ class Enigma
   end
 
   def encrypt(message, key = generate_key, date = get_todays_date)
-    pair = {encryption: CipherEngine.encrypt(message, key, date)}
+    pair = {encryption: MessageShifter.encrypt(message, key, date)}
     generate_report_block(pair, key, date)
   end
 
   def decrypt(message, key, date = get_todays_date)
-    pair = {decryption: CipherEngine.decrypt(message, key, date)}
+    pair = {decryption: MessageShifter.decrypt(message, key, date)}
     generate_report_block(pair, key, date)
   end
 
   def crack(message, date = get_todays_date)
-    key = CipherEngine.crack_key(message, date)
+    key = MessageShifter.crack_key(message, date)
     decrypt(message, key, date)
   end
 
