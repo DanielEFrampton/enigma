@@ -5,10 +5,6 @@ class CipherEngine
     ("a".."z").to_a << " "
   end
 
-  def self.shift_character(char, shift, operation)
-    charset[to_index(char).send(operation, shift) % 27]
-  end
-
   def self.to_index(char)
     charset.index(char)
   end
@@ -17,7 +13,11 @@ class CipherEngine
     charset[index]
   end
 
-  def self.engine(message, key, date, operation)
+  def self.shift_character(char, shift, operation)
+    charset[to_index(char).send(operation, shift) % 27]
+  end
+
+  def self.shift_message(message, key, date, operation)
     shift_values = ShiftGenerator.generate_shift_values(key, date)
     message.chars.reduce("") do |new_string, char|
       next new_string + char if !charset.include?(char)
@@ -27,23 +27,21 @@ class CipherEngine
   end
 
   def self.encrypt(message, key, date)
-    engine(message, key, date, :+)
+    shift_message(message, key, date, :+)
   end
 
   def self.decrypt(message, key, date)
-    engine(message, key, date, :-)
+    shift_message(message, key, date, :-)
   end
 
-  def self.shift_between(decrypt_char, encrypt_char)
+  def self.get_shift_between(decrypt_char, encrypt_char)
     ((27 - to_index(decrypt_char)) + to_index(encrypt_char)) % 27
   end
 
   def self.crack_shifts(message)
-    shifts = message.slice(-4, 4).chars.map.with_index do |encrypt_char, index|
-      shift_between([" ", "e", "n", "d"][index], encrypt_char)
-    end
-    message.gsub(/[^a-z\s]/)
-    shifts.rotate!(4 - (message.gsub(/[^a-z\s]/, '').length % 4))
+    message.slice(-4, 4).chars.map.with_index do |encrypt_char, index|
+      get_shift_between(" end"[index], encrypt_char)
+    end.rotate(4 - (message.gsub(/[^a-z\s]/, '').length % 4))
   end
 
   def self.crack_keys(shifts, date)

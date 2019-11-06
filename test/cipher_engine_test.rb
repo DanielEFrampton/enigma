@@ -43,12 +43,12 @@ class CipherEngineTest < Minitest::Test
   end
 
   def test_it_can_get_shift_value_from_encrypted_and_decrypted_charactes
-    assert_equal 3, CipherEngine.shift_between("a", "d")
-    assert_equal 1, CipherEngine.shift_between("h", "i")
-    assert_equal 26, CipherEngine.shift_between("i", "h")
-    assert_equal 5, CipherEngine.shift_between("z", "d")
-    assert_equal 1, CipherEngine.shift_between("y", "z")
-    assert_equal 26, CipherEngine.shift_between("a", " ")
+    assert_equal 3, CipherEngine.get_shift_between("a", "d")
+    assert_equal 1, CipherEngine.get_shift_between("h", "i")
+    assert_equal 26, CipherEngine.get_shift_between("i", "h")
+    assert_equal 5, CipherEngine.get_shift_between("z", "d")
+    assert_equal 1, CipherEngine.get_shift_between("y", "z")
+    assert_equal 26, CipherEngine.get_shift_between("a", " ")
   end
 
   def test_it_can_get_shift_values_from_message_with_known_ending
