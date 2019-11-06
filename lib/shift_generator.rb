@@ -7,12 +7,12 @@ class ShiftGenerator
     number.to_s.slice(-4, 4)
   end
 
-  def self.split_into_keys(number)
-    number.chars.each_cons(2).map { |pair| pair.join.to_i }
-  end
-
   def self.generate_offsets(date)
     get_last_four_of(square(date))
+  end
+
+  def self.split_into_keys(number)
+    number.chars.each_cons(2).map { |pair| pair.join.to_i }
   end
 
   def self.add_offsets_to_keys(offsets, keys)

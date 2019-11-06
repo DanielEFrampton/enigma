@@ -1,8 +1,8 @@
 require './lib/message_shifter'
+require './lib/key_cracker'
 require 'date'
 
 class Enigma
-
   def get_todays_date
     Date.today.strftime("%m%d%y")
   end
@@ -22,7 +22,7 @@ class Enigma
   end
 
   def crack(message, date = get_todays_date)
-    key = MessageShifter.crack_key(message, date)
+    key = KeyCracker.crack_key(message, date)
     decrypt(message, key, date)
   end
 
