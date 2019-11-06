@@ -8,7 +8,7 @@ class CommandLineInterface
     @output_path = argv[1]
     @key = crack ? nil : argv[2]
     @date = crack ? argv[2] : argv[3]
-    @message = File.read(input_path)
+    @message = File.read(input_path).chomp
   end
 
   def write_string_to_file(output_path, string)

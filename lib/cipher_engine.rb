@@ -42,18 +42,23 @@ class CipherEngine
     shifts = message.slice(-4, 4).chars.map.with_index do |encrypt_char, index|
       shift_between([" ", "e", "n", "d"][index], encrypt_char)
     end
-    shifts.rotate!(4 - (message.length % 4))
+    message.gsub(/[^a-z\s]/)
+    shifts.rotate!(4 - (message.gsub(/[^a-z\s]/, '').length % 4))
   end
 
   def self.crack_keys(shifts, date)
     offsets = ShiftGenerator.generate_offsets(date)
-    shifts.map.with_index { |shift, index| shift - offsets[index].to_i }
+    shifts.map.with_index do |shift, index|
+      shifted_number = (shift - offsets[index].to_i)
+      shifted_number > 0 ? shifted_number : shifted_number + 27
+    end
   end
 
   def self.get_key_permutations(keys)
     keys.map do |key|
       [
-        key.to_s.prepend("0"), (key + 27).to_s, (key + 54).to_s, (key + 81).to_s
+        (key.to_s.length == 1 ? key.to_s.prepend("0") : key.to_s),
+        (key + 27).to_s, (key + 54).to_s, (key + 81).to_s
       ].reject { |key_perm| key_perm.length > 2 }
     end
   end
