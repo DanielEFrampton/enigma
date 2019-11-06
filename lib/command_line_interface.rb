@@ -41,6 +41,7 @@ class CommandLineInterface
 
   def crack_sequence
     enigma_report = @enigma.crack(@message, @date)
+    update_attributes(enigma_report)
     write_string_to_file(@output_path, enigma_report[:decryption])
     print_terminal_report(true)
   end
